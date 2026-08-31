@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace betterUno
+namespace Uno_Project
+
 {
     internal class Player
     {
