@@ -39,7 +39,6 @@ namespace Uno_Project
 
         }
 
-
         static List<Card> CreateHand(List<Card> deck)
         {
             List<Card> hand = new();

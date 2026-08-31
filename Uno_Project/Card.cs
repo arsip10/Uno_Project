@@ -8,7 +8,7 @@ namespace Uno_Project
     {
 
         public string Color { get; private set; }
-        public string Value { get; private set; }
+        public string Value { get; private set; } // temporary to work with Logic
 
     }
 }
