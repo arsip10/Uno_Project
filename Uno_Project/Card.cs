@@ -7,7 +7,8 @@ namespace Uno_Project
     internal class Card
     {
 
-        public string color { get; private set; }
+        public string Color { get; private set; }
+        public string Value { get; private set; }
 
     }
 }
