@@ -1,2 +1,9 @@
-﻿Console.WriteLine("Hello, World!");
-ejsan
+﻿
+
+namespace betterUno
+{
+
+
+
+}
+   
