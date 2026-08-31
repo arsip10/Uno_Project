@@ -7,4 +7,12 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <EditorConfigFiles Remove="C:\Users\Provkonto\source\repos\Uno_Project\Uno_Project\.editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="C:\Users\Provkonto\source\repos\Uno_Project\Uno_Project\.editorconfig" />
+  </ItemGroup>
+
 </Project>
