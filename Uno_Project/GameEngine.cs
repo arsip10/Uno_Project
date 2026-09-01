@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace Uno_Project
 {
     internal class GameEngine
     {
 
-        private List<Player> _players;
+        static private List<Player> _players = new();
+        static List<String> Letters = Enumerable.Range('A', 26).Select(c => ((char)c).ToString()).ToList(); // List of letters A-Z
 
         
 
@@ -21,10 +23,11 @@ namespace Uno_Project
             foreach (string playerName in playerNames)
             {
                 
-                Player player1 = new Player(playerName, CreateHand(deck.Cards));
+                Player player = new Player(playerName, CreateHand(deck.Cards));
+                _players.Add(player);
             }
 
-        }
+        } // Initiates Game
 
         static List<string> GetPlayerNames()
         {
@@ -51,6 +54,40 @@ namespace Uno_Project
             }
             return hand;
         }
+
+        static void Round()
+        {
+
+            foreach (Player p in _players)
+            {
+                Console.WriteLine($"{p.Name}'s Turn.");
+
+            }
+
+        }
+
+
+        static void ShowHand(Player p) // Shows Hand and corresponding letters 
+        {
+            for(int i = 0; i < p.Hand.Count(); i++)
+            {
+
+                Console.WriteLine("Your Hand:");
+                Console.Write($"[{Letters[i]}]: {p.Hand[i].Color}-{p.Hand[i].Value} | ");
+            }
+        }
+
+
+        static void PlayCard() // Checks and plays card
+        {
+
+
+
+        }
+
+
+
+
 
 
 
