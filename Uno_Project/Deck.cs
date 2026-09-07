@@ -8,6 +8,8 @@
         public Deck()
         {
             Cards = new List<Card>();
+            MakeNumbercards();
+            MakeWildcards();
         }
 
         public static void MakeNumbercards()
@@ -33,7 +35,7 @@
                 NumberCard nc7 = new NumberCard("green", i + 1);
                 Cards.AddRange(nc, nc1, nc2, nc3, nc4, nc5, nc6, nc7);
             }
-            
+
 
         }
 
@@ -53,6 +55,11 @@
             WildCard wc11 = new WildCard("green", "switchDir");
             Cards.AddRange(wc, wc1, wc2, wc3, wc4, wc5, wc6, wc7, wc8, wc9, wc10, wc11);
 
+            for (int i = 0; i > 4; i++)
+            {
+                Cards.AddRange(new WildCard("black", "switchCol"), new WildCard("black", "addFourSwitchCol"));
+            }
+            
         }
     }
 }
