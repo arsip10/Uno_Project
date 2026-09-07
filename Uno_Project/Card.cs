@@ -8,10 +8,12 @@ namespace Uno_Project
     {
 
         public string Color { get; private set; }
+        public string Value { get; private set; }
 
-        public Card(string color)
+        public Card(string color, string value)
         {
             Color = color;
+            Value = value;
         }
     }
 
@@ -19,9 +21,9 @@ namespace Uno_Project
     {
         public int Number { get; private set; }
 
-        public NumberCard(string color, int number) : base(color)
+        public NumberCard(string color, string number) : base(color, number)
         {
-            Number = number;
+
         }
     }
 
@@ -29,9 +31,9 @@ namespace Uno_Project
     {
         public string Function { get; private set; }
 
-        public WildCard(string color, string function) : base(color)
+        public WildCard(string color, string function) : base(color, function)
         {
-            Function = function;
+
         }
 
         /*

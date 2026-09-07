@@ -18,8 +18,8 @@
             {
                 if (i == 0)
                 {
-                    NumberCard nc8 = new NumberCard("blue", i);
-                    NumberCard nc9 = new NumberCard("red", i);
+                    NumberCard nc8 = new NumberCard("blue", i.ToString());
+                    NumberCard nc9 = new NumberCard("red", i.ToString());
                     NumberCard nc10 = new NumberCard("yellow", i);
                     NumberCard nc11 = new NumberCard("green", i);
                     Cards.AddRange(nc8, nc9, nc10, nc11);
@@ -41,25 +41,28 @@
 
         public static void MakeWildcards()
         {
-            WildCard wc = new WildCard("blue", "block");
-            WildCard wc1 = new WildCard("blue", "addTwo");
-            WildCard wc2 = new WildCard("blue", "switchDir");
-            WildCard wc3 = new WildCard("red", "block");
-            WildCard wc4 = new WildCard("red", "addTwo");
-            WildCard wc5 = new WildCard("red", "switchDir");
-            WildCard wc6 = new WildCard("yellow", "block");             //ett annat sätt att göra utan att ta upp så många rader?
-            WildCard wc7 = new WildCard("yellow", "addTwo");
-            WildCard wc8 = new WildCard("yellow", "switchDir");
-            WildCard wc9 = new WildCard("green", "block");
-            WildCard wc10 = new WildCard("green", "addTwo");
-            WildCard wc11 = new WildCard("green", "switchDir");
-            Cards.AddRange(wc, wc1, wc2, wc3, wc4, wc5, wc6, wc7, wc8, wc9, wc10, wc11);
+            for (int index = 0; index > 2; index++)
+            {
+                WildCard wc = new WildCard("blue", "block");
+                WildCard wc1 = new WildCard("blue", "addTwo");
+                WildCard wc2 = new WildCard("blue", "switchDir");
+                WildCard wc3 = new WildCard("red", "block");
+                WildCard wc4 = new WildCard("red", "addTwo");
+                WildCard wc5 = new WildCard("red", "switchDir");
+                WildCard wc6 = new WildCard("yellow", "block");             //ett annat sätt att göra utan att ta upp så många rader?
+                WildCard wc7 = new WildCard("yellow", "addTwo");
+                WildCard wc8 = new WildCard("yellow", "switchDir");
+                WildCard wc9 = new WildCard("green", "block");
+                WildCard wc10 = new WildCard("green", "addTwo");
+                WildCard wc11 = new WildCard("green", "switchDir");
+                Cards.AddRange(wc, wc1, wc2, wc3, wc4, wc5, wc6, wc7, wc8, wc9, wc10, wc11);
+            }
 
             for (int i = 0; i > 4; i++)
             {
                 Cards.AddRange(new WildCard("black", "switchCol"), new WildCard("black", "addFourSwitchCol"));
             }
-            
+
         }
     }
 }
