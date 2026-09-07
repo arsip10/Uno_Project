@@ -9,6 +9,13 @@ namespace Uno_Project
         {
             Deck cardDeck = new Deck();
 
+            Console.WriteLine(Deck.Cards.Count);
+
+
+
+
+        }
+    }
 
             for(int i = 0; i < cardDeck.Cards.Length; i++)
             {
