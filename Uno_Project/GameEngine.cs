@@ -78,10 +78,13 @@ namespace Uno_Project
         }
 
 
-        static void PlayCard() // Checks and plays card
+        static void PlayCard(Card playedCard, Card gameCard) // Checks and plays card
         {
 
+            if (gameCard.Color == playedCard.Color || gameCard.Value == playedCard.Value) 
+            {
 
+            }
 
         }
 
