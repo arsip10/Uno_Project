@@ -17,12 +17,5 @@ namespace Uno_Project
         }
     }
 
-            for(int i = 0; i < cardDeck.Cards.Length; i++)
-            {
-                Console.WriteLine($"[{i}] color: {cardDeck.Cards[i].Color}, ");
-            }
-        }
-    }
-
 }
    
