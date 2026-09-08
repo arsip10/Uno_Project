@@ -19,8 +19,6 @@ namespace Uno_Project
 
     class NumberCard : Card
     {
-        public int Number { get; private set; }
-
         public NumberCard(string color, string number) : base(color, number)
         {
 
@@ -29,8 +27,6 @@ namespace Uno_Project
 
     class WildCard : Card
     {
-        public string Function { get; private set; }
-
         public WildCard(string color, string function) : base(color, function)
         {
 
