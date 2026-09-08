@@ -77,13 +77,35 @@ namespace Uno_Project
             }
         }
 
+        static Card GetPlayedCard(Player p)
+        {
+
+            Console.WriteLine("Choose a card to play by entering it's corresponding letter.");
+            Console.Write(">>>");
+            string choice = Console.ReadLine();
+
+            int cardIndex = 100;
+            for (int i = 0; i < p.Hand.Count; i++) // this could be a problem
+            {
+                if (Letters[i] == choice) { cardIndex = i; break; }
+            }
+
+            if (cardIndex != 100) { } //Next Time: check and loop until cardIndex isn't 100
+            return p.Hand[cardIndex];
+            
+            
+            
+
+        }
+
 
         static void PlayCard(Card playedCard, Card gameCard) // Checks and plays card
         {
 
+
             if (gameCard.Color == playedCard.Color || gameCard.Value == playedCard.Value) 
             {
-
+                
             }
 
         }
