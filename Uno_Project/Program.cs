@@ -29,7 +29,8 @@ namespace Uno_Project
             Console.WriteLine("--- HOW TO PLAY ---\n"
                              +"Each player starts with 7 cards in their hands.\n"
                              +"Match the top card on the DISCARD pile either by number, color, or word. \nFor example, if the card is a Green 7, you must play a Green card or any color 7. \nOr, you may play any Wild card or a Wild Draw 4 card. If you don't have anything that matches, you must pick a card from the DRAW pile\n"
-                             + "If you draw a card you can play, play it. Otherwise, play moves to the next person.");
+                             +"If you draw a card you can play, play it. Otherwise, play moves to the next person.\n"
+                             +"The first player to get rid of all of their cards and yell out UNO wins!");
         }
 
         static void Main()
