@@ -14,7 +14,7 @@ namespace Uno_Project
         
 
 
-        static public void StartRound(Deck deck)
+        static public void StartGame(Deck deck)
         {
 
             List<string> playerNames = GetPlayerNames();
@@ -40,12 +40,12 @@ namespace Uno_Project
 
             return new List<string>() { name1, name2 };
 
-        }
+        } //Done
 
         static List<Card> CreateHand(List<Card> deck)
         {
             List<Card> hand = new();
-            for (int i = 0; i <= 7; i++)
+            for (int i = 0; i <= 7; i++) // Seven cards per hand
             {
 
                 hand.Add(deck[0]);
@@ -53,15 +53,22 @@ namespace Uno_Project
 
             }
             return hand;
-        }
+        } //Done
 
-        static void Round()
+        static void Round(Deck deck, GamePile gp) // Ongoing
         {
+            PlaceFirstCard(deck, gp);
 
             foreach (Player p in _players)
             {
+                
                 Console.WriteLine($"{p.Name}'s Turn.");
-
+                ShowHand(p);
+                PlayCard(GetPlayedCard(p), gp);
+                if (p.Hand.Count == 0)
+                {
+                    Console.WriteLine($"{p.Name} Won!");
+                }
             }
 
         }
@@ -75,44 +82,50 @@ namespace Uno_Project
                 Console.WriteLine("Your Hand:");
                 Console.Write($"[{Letters[i]}]: {p.Hand[i].Color}-{p.Hand[i].Value} | ");
             }
-        }
+        } //Done
 
-        static Card GetPlayedCard(Player p)
+        static Card GetPlayedCard(Player p) 
+        {
+            while (true)
+            {
+                Console.WriteLine("Choose a card to play by entering it's corresponding letter.");
+                Console.Write(">>>");
+                string choice = Console.ReadLine();
+
+                int cardIndex = 100;
+                for (int i = 0; i < p.Hand.Count; i++) // this could be a problem
+                {
+                    if (Letters[i] == choice) { cardIndex = i; break; }
+                }
+
+                if (cardIndex != 100) { return p.Hand[cardIndex]; } //Next Time: check and loop until cardIndex isn't 100
+            }
+            
+            
+            
+
+        } //Done
+
+
+        static void PlayCard(Card playedCard, GamePile gp) // Checks and plays card
         {
 
-            Console.WriteLine("Choose a card to play by entering it's corresponding letter.");
-            Console.Write(">>>");
-            string choice = Console.ReadLine();
 
-            int cardIndex = 100;
-            for (int i = 0; i < p.Hand.Count; i++) // this could be a problem
+            if (gp.Cards[0].Color == playedCard.Color || gp.Cards[0].Value == playedCard.Value) 
             {
-                if (Letters[i] == choice) { cardIndex = i; break; }
+                Console.WriteLine($"Played: {playedCard.Value}");
+                gp.Cards.Add(playedCard);
             }
+            else { Console.WriteLine("Cannot Play This Card!"); }
 
-            if (cardIndex != 100) { } //Next Time: check and loop until cardIndex isn't 100
-            return p.Hand[cardIndex];
-            
-            
-            
-
-        }
+        } //Done
 
 
-        static void PlayCard(Card playedCard, Card gameCard) // Checks and plays card
+
+        static void PlaceFirstCard(Deck deck, GamePile gp) //Done
         {
-
-
-            if (gameCard.Color == playedCard.Color || gameCard.Value == playedCard.Value) 
-            {
-                
-            }
-
+            gp.Cards.Add(deck.Cards[0]);
         }
-
-
-
-
 
 
 
