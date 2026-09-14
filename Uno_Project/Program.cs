@@ -35,6 +35,7 @@ namespace Uno_Project
 
         static void Main()
         {
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
             bool keepgoing = true;
             string systemMsg = "";
 
@@ -54,7 +55,7 @@ namespace Uno_Project
 
                     case 0:
                         keepgoing = false;
-                        systemMsg = "Quitting...";
+                        systemMsg = "Quitting...😢";
                         break;
 
                     default:
