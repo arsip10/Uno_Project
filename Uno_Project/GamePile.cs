@@ -7,7 +7,7 @@ namespace Uno_Project
     internal class GamePile
     {
 
-        public List<Card> Cards { get; set; }
+        public static List<Card> Cards = new();
 
     }
 }

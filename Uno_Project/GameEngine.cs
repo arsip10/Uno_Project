@@ -14,7 +14,7 @@ namespace Uno_Project
         
 
 
-        static public void StartRound(Deck deck)
+        static public void StartGame()
         {
 
             List<string> playerNames = GetPlayerNames();
@@ -23,9 +23,11 @@ namespace Uno_Project
             foreach (string playerName in playerNames)
             {
                 
-                Player player = new Player(playerName, CreateHand(deck.Cards));
+                Player player = new Player(playerName, CreateHand(Deck.Cards));
                 _players.Add(player);
             }
+
+            Round();
 
         } // Initiates Game
 
@@ -40,12 +42,12 @@ namespace Uno_Project
 
             return new List<string>() { name1, name2 };
 
-        }
+        } 
 
         static List<Card> CreateHand(List<Card> deck)
         {
             List<Card> hand = new();
-            for (int i = 0; i <= 7; i++)
+            for (int i = 0; i <= 7; i++) // Seven cards per hand
             {
 
                 hand.Add(deck[0]);
@@ -53,66 +55,93 @@ namespace Uno_Project
 
             }
             return hand;
-        }
+        } 
 
-        static void Round()
+        static void Round() 
         {
-
-            foreach (Player p in _players)
+            bool game = true;
+            PlaceFirstCard();
+            while (game)
             {
-                Console.WriteLine($"{p.Name}'s Turn.");
+                foreach (Player p in _players)
+                {
 
+                    Console.WriteLine($"{p.Name}'s Turn.");
+                    ShowHand(p);
+                    PlayCard(GetPlayedCard(p), p);
+                    if (p.Hand.Count == 0)
+                    {
+                        Console.WriteLine($"{p.Name} Won!");
+                        game = false;
+                        
+                    }
+                }
+
+                
             }
+            Console.Write("Game End!");
+
 
         }
 
 
         static void ShowHand(Player p) // Shows Hand and corresponding letters 
         {
-            for(int i = 0; i < p.Hand.Count(); i++)
+            Console.WriteLine($"\n\nTop Card: {GamePile.Cards[GamePile.Cards.Count - 1].Color}-{GamePile.Cards[GamePile.Cards.Count - 1].Value}\n\n");
+            Console.WriteLine("Your Hand:");
+            for (int i = 0; i < p.Hand.Count(); i++)
             {
 
-                Console.WriteLine("Your Hand:");
-                Console.Write($"[{Letters[i]}]: {p.Hand[i].Color}-{p.Hand[i].Value} | ");
+                Console.Write($"[{Letters[i]}]: {p.Hand[i].Color}-{p.Hand[i].Value} | "); //change color to emojis
             }
-        }
 
-        static Card GetPlayedCard(Player p)
+            
+
+        } 
+
+        static Card GetPlayedCard(Player p) 
+        {
+            while (true)
+            {
+                Console.WriteLine("\nChoose a card to play by entering it's corresponding letter.");
+                Console.Write(">>>");
+                string choice = Console.ReadLine().ToUpper();
+
+                int cardIndex = 100;
+                for (int i = 0; i < p.Hand.Count; i++) // this could be a problem
+                {
+                    if (Letters[i] == choice) { cardIndex = i; break; }
+                }
+
+                if (cardIndex != 100) { return p.Hand[cardIndex]; } //Next Time: check and loop until cardIndex isn't 100
+            }
+            
+            
+            
+
+        } 
+
+
+        static void PlayCard(Card playedCard, Player p) // Checks and plays card
         {
 
-            Console.WriteLine("Choose a card to play by entering it's corresponding letter.");
-            Console.Write(">>>");
-            string choice = Console.ReadLine();
 
-            int cardIndex = 100;
-            for (int i = 0; i < p.Hand.Count; i++) // this could be a problem
+            if (GamePile.Cards[GamePile.Cards.Count - 1].Color == playedCard.Color || GamePile.Cards[GamePile.Cards.Count - 1].Value == playedCard.Value) 
             {
-                if (Letters[i] == choice) { cardIndex = i; break; }
+                Console.WriteLine($"Played: {playedCard.Value}");
+                GamePile.Cards.Add(playedCard);
+                p.Hand.Remove(playedCard);
             }
+            else { Console.WriteLine("Cannot Play This Card!"); }
 
-            if (cardIndex != 100) { } //Next Time: check and loop until cardIndex isn't 100
-            return p.Hand[cardIndex];
-            
-            
-            
-
-        }
+        } 
 
 
-        static void PlayCard(Card playedCard, Card gameCard) // Checks and plays card
+
+        static void PlaceFirstCard() 
         {
-
-
-            if (gameCard.Color == playedCard.Color || gameCard.Value == playedCard.Value) 
-            {
-                
-            }
-
+            GamePile.Cards.Add(Deck.Cards[0]);
         }
-
-
-
-
 
 
 
