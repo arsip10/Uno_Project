@@ -62,7 +62,6 @@ namespace Uno_Project
                         systemMsg = "Wrong input, sending you back to the main menu...";
                         break;
                 }
-                
                 Console.WriteLine(systemMsg);
             }
         }
