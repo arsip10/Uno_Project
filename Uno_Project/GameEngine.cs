@@ -14,7 +14,7 @@ namespace Uno_Project
         
 
 
-        static public void StartGame(Deck deck)
+        static public void StartGame()
         {
 
             List<string> playerNames = GetPlayerNames();
@@ -23,9 +23,11 @@ namespace Uno_Project
             foreach (string playerName in playerNames)
             {
                 
-                Player player = new Player(playerName, CreateHand(deck.Cards));
+                Player player = new Player(playerName, CreateHand(Deck.Cards));
                 _players.Add(player);
             }
+
+            Round();
 
         } // Initiates Game
 
@@ -40,7 +42,7 @@ namespace Uno_Project
 
             return new List<string>() { name1, name2 };
 
-        } //Done
+        } 
 
         static List<Card> CreateHand(List<Card> deck)
         {
@@ -53,44 +55,57 @@ namespace Uno_Project
 
             }
             return hand;
-        } //Done
+        } 
 
-        static void Round(Deck deck, GamePile gp) // Ongoing
+        static void Round() 
         {
-            PlaceFirstCard(deck, gp);
-
-            foreach (Player p in _players)
+            bool game = true;
+            PlaceFirstCard();
+            while (game)
             {
-                
-                Console.WriteLine($"{p.Name}'s Turn.");
-                ShowHand(p);
-                PlayCard(GetPlayedCard(p), gp);
-                if (p.Hand.Count == 0)
+                foreach (Player p in _players)
                 {
-                    Console.WriteLine($"{p.Name} Won!");
+
+                    Console.WriteLine($"{p.Name}'s Turn.");
+                    ShowHand(p);
+                    PlayCard(GetPlayedCard(p), p);
+                    if (p.Hand.Count == 0)
+                    {
+                        Console.WriteLine($"{p.Name} Won!");
+                        game = false;
+                        
+                    }
                 }
+
+                
             }
+            Console.Write("Game End!");
+
 
         }
 
 
         static void ShowHand(Player p) // Shows Hand and corresponding letters 
         {
-            for(int i = 0; i < p.Hand.Count(); i++)
+            Console.WriteLine($"\n\nTop Card: {GamePile.Cards[GamePile.Cards.Count - 1].Color}-{GamePile.Cards[GamePile.Cards.Count - 1].Value}\n\n");
+            Console.WriteLine("Your Hand:");
+            for (int i = 0; i < p.Hand.Count(); i++)
             {
 
-                Console.WriteLine("Your Hand:");
-                Console.Write($"[{Letters[i]}]: {p.Hand[i].Color}-{p.Hand[i].Value} | ");
+                Console.Write($"[{Letters[i]}]: {p.Hand[i].Color}-{p.Hand[i].Value} | "); //change color to emojis
             }
-        } //Done
+
+            
+
+        } 
 
         static Card GetPlayedCard(Player p) 
         {
             while (true)
             {
-                Console.WriteLine("Choose a card to play by entering it's corresponding letter.");
+                Console.WriteLine("\nChoose a card to play by entering it's corresponding letter.");
                 Console.Write(">>>");
-                string choice = Console.ReadLine();
+                string choice = Console.ReadLine().ToUpper();
 
                 int cardIndex = 100;
                 for (int i = 0; i < p.Hand.Count; i++) // this could be a problem
@@ -104,27 +119,28 @@ namespace Uno_Project
             
             
 
-        } //Done
+        } 
 
 
-        static void PlayCard(Card playedCard, GamePile gp) // Checks and plays card
+        static void PlayCard(Card playedCard, Player p) // Checks and plays card
         {
 
 
-            if (gp.Cards[0].Color == playedCard.Color || gp.Cards[0].Value == playedCard.Value) 
+            if (GamePile.Cards[GamePile.Cards.Count - 1].Color == playedCard.Color || GamePile.Cards[GamePile.Cards.Count - 1].Value == playedCard.Value) 
             {
                 Console.WriteLine($"Played: {playedCard.Value}");
-                gp.Cards.Add(playedCard);
+                GamePile.Cards.Add(playedCard);
+                p.Hand.Remove(playedCard);
             }
             else { Console.WriteLine("Cannot Play This Card!"); }
 
-        } //Done
+        } 
 
 
 
-        static void PlaceFirstCard(Deck deck, GamePile gp) //Done
+        static void PlaceFirstCard() 
         {
-            gp.Cards.Add(deck.Cards[0]);
+            GamePile.Cards.Add(Deck.Cards[0]);
         }
 
 
