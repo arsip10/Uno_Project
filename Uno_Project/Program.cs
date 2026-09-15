@@ -1,5 +1,3 @@
-﻿
-
 namespace Uno_Project
 {
     class Program
