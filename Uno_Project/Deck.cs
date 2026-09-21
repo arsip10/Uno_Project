@@ -4,7 +4,7 @@
     {
 
         public static List<Card> Cards { get; private set; }
-        public static List<string> Colors = new List<string>(["blue", "red", "yellow", "green"]);
+        public static List<string> Colors = new List<string>(["🔵", "🔴", "🟡", "🟢"]);
 
         public Deck()
         {
