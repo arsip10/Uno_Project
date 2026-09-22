@@ -30,9 +30,8 @@
                     }
                 }
             }
-
-
         }
+
 
         public static void MakeWildcards()
         {
@@ -53,8 +52,30 @@
             }
 
         }
+
+
+        static void ShuffleDeck()
+        {
+            //Implement shuffle cards here.
+        }
+
+
     }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /*
                         1.switchDir
