@@ -15,4 +15,10 @@
     <None Include="C:\Users\Provkonto\source\repos\Uno_Project\Uno_Project\.editorconfig" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Aspose.Imaging" Version="26.9.0" />
+    <PackageReference Include="Aspose.SVG" Version="26.8.0" />
+    <PackageReference Include="Spectre.Console" Version="0.57.2" />
+  </ItemGroup>
+
 </Project>

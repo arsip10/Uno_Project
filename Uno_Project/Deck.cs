@@ -49,7 +49,7 @@
 
             for (int i = 0; i < 4; i++)
             {
-                Cards.AddRange(new WildCard("black", "switchCol"), new WildCard("black", "addFourSwitchCol"));
+                Cards.AddRange(new WildCard("🌈", "switchCol"), new WildCard("🌈", "addFourSwitchCol"));
             }
 
         }
