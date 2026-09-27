@@ -39,6 +39,9 @@ namespace Uno_Project
         static void Main()
         {
             Console.OutputEncoding = Encoding.UTF8;
+            Console.BackgroundColor = ConsoleColor.White;
+            Console.ForegroundColor = ConsoleColor.Black;
+            Console.Clear();
 
             bool keepgoing = true;
             string systemMsg = "";
