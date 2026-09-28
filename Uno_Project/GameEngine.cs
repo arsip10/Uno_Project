@@ -33,16 +33,24 @@ namespace Uno_Project
 
         }
 
-        static List<string> GetPlayerNames()
+        static int GetNrOfPlayers()
         {
+            Console.WriteLine("");
+            int nrP = Console.ReadLine(); //använda arrow keys för att user ska kunna välja amount of players men bara mellan 1-4 players (controlled)
+            return nrP;
+        }
 
-            Console.Write("Enter The Name of Player 1: ");
-            string name1 = Console.ReadLine();
+        static List<string> GetPlayerNames(int nrPlayers)
+        {
+            List<string> pn = new List<string>();
 
-            Console.Write("Enter the Name of Player 2: ");
-            string name2 = Console.ReadLine();
-
-            return new List<string>() { name1, name2 };
+            for(int i=0; i<nrPlayers; i++)
+            {
+                Console.Write($"Enter The Name of Player {i+1}: ");
+                string name = Console.ReadLine();
+                pn.Add(name);
+            }
+            return pn;
 
         }
 
@@ -96,12 +104,12 @@ namespace Uno_Project
 
         static void ShowHand(Player p) // Shows Hand and corresponding letters 
         {
-            Console.WriteLine($"\n\nTop Card: {GamePile.Cards[GamePile.Cards.Count - 1].Color}-{GamePile.Cards[GamePile.Cards.Count - 1].Value}\n\n");
+            Console.WriteLine($"\n\nTop Card: {GamePile.Cards[GamePile.Cards.Count - 1].Color} {GamePile.Cards[GamePile.Cards.Count - 1].Value}\n\n");
             Console.WriteLine("Your Hand:");
             for (int i = 0; i < p.Hand.Count(); i++)
             {
 
-                Console.Write($"[{Letters[i]}]: {p.Hand[i].Color}-{p.Hand[i].Value} | "); //change color to emojis
+                Console.Write($"[{Letters[i]}]: {p.Hand[i].Color} {p.Hand[i].Value} | "); 
             }
 
 
