@@ -36,6 +36,7 @@ namespace Uno_Project
             Console.OutputEncoding = System.Text.Encoding.UTF8;
             bool keepgoing = true;
             string systemMsg = "";
+            Deck deck = new();
 
             while (keepgoing)
             {
@@ -44,7 +45,7 @@ namespace Uno_Project
                 switch (MenuChoice())
                 {
                     case 1:
-
+                        GameEngine.StartGame();
                         break;
 
                     case 2:

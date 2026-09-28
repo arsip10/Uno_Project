@@ -5,12 +5,15 @@
 
         public static List<Card> Cards { get; private set; }
         public static List<string> Colors = new List<string>(["🔵", "🔴", "🟡", "🟢"]);
+        public static Random r = new();
 
         public Deck()
         {
             Cards = new List<Card>();
             MakeNumbercards();
             MakeWildcards();
+            ShuffleDeck();
+            int a = 0;
         }
 
         public static void MakeNumbercards()
@@ -48,7 +51,7 @@
 
             for (int i = 0; i < 4; i++)
             {
-                Cards.AddRange(new WildCard("black", "switchCol"), new WildCard("black", "addFourSwitchCol"));
+                Cards.AddRange(new WildCard("🌈", "switchCol"), new WildCard("🌈", "addFourSwitchCol"));
             }
 
         }
@@ -56,7 +59,7 @@
 
         static void ShuffleDeck()
         {
-            //Implement shuffle cards here.
+            Cards = Cards.OrderBy(item => r.Next()).ToList();
         }
 
 
