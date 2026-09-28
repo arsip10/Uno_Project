@@ -18,25 +18,37 @@ namespace Uno_Project
 
         static public void StartGame() // Initiates Game
         {
+            // Reset state for new games
+            _players.Clear();
+            GamePile.Cards.Clear();
+            currentPlayerIndex = 0;
+            playDirection = 1;
 
-            List<string> playerNames = GetPlayerNames();
-
+            int numPlayers = GetNrOfPlayers();
+            List<string> playerNames = GetPlayerNames(numPlayers);
 
             foreach (string playerName in playerNames)
             {
-
                 Player player = new Player(playerName, CreateHand(Deck.Cards));
                 _players.Add(player);
             }
 
             Round();
-
         }
 
         static int GetNrOfPlayers()
         {
-            Console.WriteLine("");
-            int nrP = Console.ReadLine(); //använda arrow keys för att user ska kunna välja amount of players men bara mellan 1-4 players (controlled)
+            int nrP = 0;
+            while (nrP < 2 || nrP > 4)
+            {
+                Console.Write("Enter number of players (2-4): ");
+                string input = Console.ReadLine().Trim();
+
+                if (!int.TryParse(input, out nrP) || nrP < 2 || nrP > 4)
+                {
+                    Console.WriteLine("Invalid selection. Please choose between 2 and 4 players.");
+                }
+            }
             return nrP;
         }
 
@@ -44,14 +56,17 @@ namespace Uno_Project
         {
             List<string> pn = new List<string>();
 
-            for(int i=0; i<nrPlayers; i++)
+            for (int i = 0; i < nrPlayers; i++)
             {
-                Console.Write($"Enter The Name of Player {i+1}: ");
-                string name = Console.ReadLine();
+                string name = "";
+                while (string.IsNullOrWhiteSpace(name))
+                {
+                    Console.Write($"Enter The Name of Player {i + 1}: ");
+                    name = Console.ReadLine().Trim();
+                }
                 pn.Add(name);
             }
             return pn;
-
         }
 
         static List<Card> CreateHand(List<Card> deck)
@@ -77,6 +92,7 @@ namespace Uno_Project
                 bool turn = true;
                 while (turn)
                 {
+                    Console.Clear();
                     Console.WriteLine($"\n==========================================");
                     Console.WriteLine($"{p.Name}'s Turn.");
 
@@ -189,9 +205,7 @@ namespace Uno_Project
             }
         }
 
-        // ==========================================
-        // NEW HELPER METHODS (Add these to GameEngine)
-        // ==========================================
+        
 
         static void NextTurn()
         {
@@ -267,7 +281,24 @@ namespace Uno_Project
 
         static void PlaceFirstCard()
         {
-            GamePile.Cards.Add(Deck.Cards[0]);
+            for (int i = 0; i < Deck.Cards.Count; i++)
+            {
+                Card candidate = Deck.Cards[i];
+
+                // Check if card is a Wild card or special card
+                bool isWild = candidate is WildCard ||
+                             candidate.Color == "black" ||
+                             candidate.Color == "🌈" ||
+                             candidate.Value == "switchCol" ||
+                             candidate.Value == "addFourSwitchCol";
+
+                if (!isWild)
+                {
+                    GamePile.Cards.Add(candidate);
+                    Deck.Cards.RemoveAt(i); // Remove from deck so it isn't drawn later
+                    return;
+                }
+            }
         }
 
 
@@ -314,8 +345,8 @@ namespace Uno_Project
         static bool PileCardCompare(Card card)
         {
             Card topCard = GamePile.Cards[GamePile.Cards.Count - 1];
-            // Matches by color, value, or if the played card is a Wild card ("black")
-            return (card.Color == topCard.Color || card.Value == topCard.Value || card.Color == "black");
+            // Matches by color, value, or if the played card is a Wild card ("🌈")
+            return (card.Color == topCard.Color || card.Value == topCard.Value || card.Color == "🌈");
         }
 
     }
