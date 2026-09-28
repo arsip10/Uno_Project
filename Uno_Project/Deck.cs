@@ -5,12 +5,15 @@
 
         public static List<Card> Cards { get; private set; }
         public static List<string> Colors = new List<string>(["🔵", "🔴", "🟡", "🟢"]);
+        public static Random r = new();
 
         public Deck()
         {
             Cards = new List<Card>();
             MakeNumbercards();
             MakeWildcards();
+            ShuffleDeck();
+            int a = 0;
         }
 
         public static void MakeNumbercards()
@@ -30,9 +33,8 @@
                     }
                 }
             }
-
-
         }
+
 
         public static void MakeWildcards()
         {
@@ -53,8 +55,30 @@
             }
 
         }
+
+
+        static void ShuffleDeck()
+        {
+            Cards = Cards.OrderBy(item => r.Next()).ToList();
+        }
+
+
     }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /*
                         1.switchDir
